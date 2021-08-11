@@ -106,7 +106,9 @@ class CaptionTSVDataset(Dataset):
         return self.image_keys[img_idx]
 
     def get_image_features(self, img_idx):
-        feat_info = json.loads(self.feat_tsv.seek(img_idx)[1])
+        a = self.feat_tsv.seek(img_idx)[1]
+        a = a.replace("'",'"')
+        feat_info = json.loads(a)
         num_boxes = feat_info['num_boxes']
         features = np.frombuffer(base64.b64decode(feat_info['features']), np.float32
                 ).reshape((num_boxes, -1))
@@ -121,7 +123,9 @@ class CaptionTSVDataset(Dataset):
     def get_od_labels(self, img_idx):
         od_labels = None
         if self.add_od_labels:
-            label_info = json.loads(self.label_tsv.seek(img_idx)[1])
+            a = self.label_tsv.seek(img_idx)[1]
+            a = a.replace("'",'"')
+            label_info = json.loads(a)
             od_labels = " ".join([l['class'] for l in label_info])
         return od_labels
 
