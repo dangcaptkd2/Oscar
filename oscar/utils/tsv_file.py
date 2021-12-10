@@ -18,7 +18,7 @@ def generate_lineidx_file(filein, idxout):
 
 
 class TSVFile(object):
-    def __init__(self, tsv_file, generate_lineidx=False):
+    def __init__(self, tsv_file, generate_lineidx=True):
         self.tsv_file = tsv_file
         self.lineidx = op.splitext(tsv_file)[0] + '.lineidx'
         self._fp = None
