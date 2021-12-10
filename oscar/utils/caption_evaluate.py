@@ -12,8 +12,16 @@ import tempfile
 import time
 from typing import Dict, Optional
 
-from coco_caption.pycocotools.coco import COCO
-from coco_caption.pycocoevalcap.eval import COCOEvalCap
+import sys
+sys.path.append('/content/Oscar/coco-caption/pycocoevalcap')
+sys.path.append('/content/Oscar/coco-caption/pycocoevalcap/eval_real.py')
+
+sys.path.append('/content/Oscar/coco-caption')
+sys.path.append('/content/Oscar/coco-caption/pycocotools')
+sys.path.append('/content/Oscar/coco-caption/pycocotools/coco.py')
+
+from pycocotools.coco import COCO
+from pycocoevalcap.eval import COCOEvalCap
 from .cider.pyciderevalcap.ciderD.ciderD import CiderD
 
 
