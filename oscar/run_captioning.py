@@ -602,7 +602,8 @@ def get_predict_file(output_dir, yaml_file, args):
         cc.append('cbs{}'.format(args.min_constraints_to_satisfy))
     if args.output_hidden_states:
         cc.append('hidden')
-    return op.join(output_dir, '{}.tsv'.format('.'.join(cc)))
+    #return op.join(output_dir, '{}.tsv'.format('.'.join(cc)))
+    return args.out_file
 
 
 def get_evaluate_file(predict_file):
@@ -818,6 +819,10 @@ def main():
                         help="Path to pre-trained model or model type.")
     parser.add_argument("--output_dir", default='output/', type=str, required=False,
                         help="The output directory to save checkpoint and test results.")
+        #my args
+    parser.add_argument("--out_file", default='output/', type=str, required=False,
+                        help="The output directory to save test results.")
+        #end
     parser.add_argument("--loss_type", default='sfmx', type=str, 
                         help="Loss function types: support kl, x2, sfmx")
     parser.add_argument("--config_name", default="", type=str, 
