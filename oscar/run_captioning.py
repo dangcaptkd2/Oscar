@@ -124,8 +124,18 @@ class CaptionTSVDataset(Dataset):
         od_labels = None
         if self.add_od_labels:
             a = self.label_tsv.seek(img_idx)[1]
+
+            a = a.replace("pitcher's mound", "pitcher mound")
+            a = a.replace("catcher's mitt", "catcher mitt")
             a = a.replace("'",'"')
-            label_info = json.loads(a)
+
+            if a[0] == '"':
+                a = a[1:-1]
+                a = a.replace('""','"')
+            try:
+                label_info = json.loads(a)
+            except:
+                print(a)    
             od_labels = " ".join([l['class'] for l in label_info])
         return od_labels
 
